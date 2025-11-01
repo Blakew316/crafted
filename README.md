@@ -433,6 +433,116 @@
         color: #6e6e73;
     }
 
+    /* FAQ Section */
+    .faq-section {
+        padding: 140px 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+    }
+
+    .faq-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 60px;
+    }
+
+    .faq-item {
+        background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+        border-radius: 20px;
+        padding: 40px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .faq-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #0071e3, #00c6ff);
+        transform: scaleY(0);
+        transition: transform 0.3s;
+    }
+
+    .faq-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        border-color: rgba(0, 113, 227, 0.2);
+    }
+
+    .faq-item:hover::before {
+        transform: scaleY(1);
+    }
+
+    .faq-item h3 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1d1d1f;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .faq-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .faq-item p, .faq-item ul {
+        font-size: 17px;
+        color: #6e6e73;
+        line-height: 1.8;
+        margin-bottom: 16px;
+    }
+
+    .faq-item ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .faq-item ul li {
+        padding-left: 32px;
+        position: relative;
+        margin-bottom: 12px;
+    }
+
+    .faq-item ul li::before {
+        content: '→';
+        position: absolute;
+        left: 8px;
+        color: #0071e3;
+        font-weight: 600;
+    }
+
+    .faq-item code {
+        background: #f5f5f7;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+        font-size: 15px;
+        color: #0071e3;
+        border: 1px solid #e5e5e7;
+    }
+
+    .faq-item strong {
+        color: #1d1d1f;
+        font-weight: 600;
+    }
+
     /* Contact Form Section */
     .contact-section {
         padding: 140px 60px;
@@ -757,6 +867,7 @@
 
         .services,
         .support-section,
+        .faq-section,
         .contact-section {
             padding: 80px 30px;
         }
@@ -807,6 +918,7 @@
             <ul class="nav-links">
                 <li><a href="#services">Services</a></li>
                 <li><a href="#support">Support</a></li>
+                <li><a href="#faq">Resources</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -930,6 +1042,89 @@
     </div>
 </section>
 
+<!-- FAQ/Resources Section -->
+<section class="faq-section" id="faq">
+    <div class="section-header scroll-animate fade-in-up">
+        <div class="section-label">Resources</div>
+        <h2 class="section-title">Developer Resources & FAQ</h2>
+        <p class="section-description">
+            Quick guides and answers to common technical questions to help you get up and running quickly.
+        </p>
+    </div>
+    
+    <div class="faq-grid">
+        <div class="faq-item scroll-animate fade-in-up">
+            <h3>
+                <div class="faq-icon">🔑</div>
+                Where can I find my public SSH key?
+            </h3>
+            <p>
+                SSH keys are commonly used for secure authentication to servers and development systems. 
+                Here's how to find your public SSH key on different operating systems:
+            </p>
+            
+            <p><strong>On macOS and Linux:</strong></p>
+            <ul>
+                <li>Open Terminal</li>
+                <li>Run the command: <code>cat ~/.ssh/id_rsa.pub</code></li>
+                <li>If you're using a different key type (like ed25519), try: <code>cat ~/.ssh/id_ed25519.pub</code></li>
+                <li>Your public key will be displayed in the terminal - it typically starts with <code>ssh-rsa</code> or <code>ssh-ed25519</code></li>
+            </ul>
+            
+            <p><strong>On Windows (using PowerShell or Command Prompt):</strong></p>
+            <ul>
+                <li>Open PowerShell or Command Prompt</li>
+                <li>Run: <code>type %USERPROFILE%\.ssh\id_rsa.pub</code></li>
+                <li>For Git Bash users: <code>cat ~/.ssh/id_rsa.pub</code></li>
+            </ul>
+            
+            <p><strong>Don't have an SSH key yet?</strong></p>
+            <ul>
+                <li>Generate one with: <code>ssh-keygen -t ed25519 -C "your_email@example.com"</code></li>
+                <li>Press Enter to accept the default file location</li>
+                <li>Optionally, enter a passphrase for added security</li>
+                <li>Your public key will be saved to <code>~/.ssh/id_ed25519.pub</code></li>
+            </ul>
+        </div>
+        
+        <div class="faq-item scroll-animate fade-in-up">
+            <h3>
+                <div class="faq-icon">🔒</div>
+                How do I use my SSH key securely?
+            </h3>
+            <p>
+                <strong>Best practices for SSH key security:</strong>
+            </p>
+            <ul>
+                <li><strong>Never share your private key</strong> - Only share your public key (the .pub file)</li>
+                <li>Always use a passphrase when generating SSH keys for additional security</li>
+                <li>Set proper permissions on your SSH directory: <code>chmod 700 ~/.ssh</code></li>
+                <li>Keep your private key secure: <code>chmod 600 ~/.ssh/id_rsa</code></li>
+                <li>Consider using ssh-agent to manage your keys without repeatedly entering passphrases</li>
+            </ul>
+        </div>
+        
+        <div class="faq-item scroll-animate fade-in-up">
+            <h3>
+                <div class="faq-icon">💻</div>
+                How do I connect to a server using SSH?
+            </h3>
+            <p>
+                Once your SSH key is set up and added to the server, you can connect using:
+            </p>
+            <ul>
+                <li>Basic connection: <code>ssh username@server-address</code></li>
+                <li>Specify a port: <code>ssh -p 2222 username@server-address</code></li>
+                <li>Use a specific key: <code>ssh -i ~/.ssh/custom_key username@server-address</code></li>
+            </ul>
+            <p>
+                For our custom applications and integrations, we'll provide you with specific connection details 
+                and help you set up secure access to your systems.
+            </p>
+        </div>
+    </div>
+</section>
+
 <!-- Contact Form Section -->
 <section class="contact-section" id="contact">
     <div class="contact-wrapper">
@@ -1014,8 +1209,8 @@
             <h4>Company</h4>
             <ul class="footer-links">
                 <li><a href="#services">About Us</a></li>
+                <li><a href="#faq">Resources</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#services">Our Work</a></li>
                 <li><a href="#support">Support</a></li>
             </ul>
         </div>
